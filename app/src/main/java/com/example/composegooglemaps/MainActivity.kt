@@ -9,20 +9,23 @@ import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.composegooglemaps.BuildConfig.GOOGLE_MAPS_API_KEY
 import com.example.composegooglemaps.ui.theme.ComposeGoogleMapsTheme
-import com.example.composegooglemaps.ui.theme.components.MapComponent
-import com.example.composegooglemaps.ui.theme.components.MapSelectLocation
+import com.example.composegooglemaps.ui.theme.components.GoogleMapsAutoComplete
+import com.google.android.libraries.places.api.Places
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Places.initialize(applicationContext, GOOGLE_MAPS_API_KEY)
         setContent {
             ComposeGoogleMapsTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MapComponent{ mapUiSettings,mapProperties,cameraPositionState ->
+//                    MapComponent{ mapUiSettings,mapProperties,cameraPositionState ->
 //                        MapWithMarkers(
 //                            markerList = listOf(
 //                                GoogleMapMarkerDataClass(
@@ -38,12 +41,15 @@ class MainActivity : ComponentActivity() {
 //                            mapUiSettings = mapUiSettings,
 //                            mapProperties = mapProperties
 //                        )
-                        MapSelectLocation(
-                            cameraPositionState = cameraPositionState,
-                            mapUiSettings = mapUiSettings,
-                            mapProperties = mapProperties
-                        )
-                    }
+//                        MapSelectLocation(
+//                            cameraPositionState = cameraPositionState,
+//                            mapUiSettings = mapUiSettings,
+//                            mapProperties = mapProperties
+//                        )
+//                    }
+                    GoogleMapsAutoComplete(
+                        selectedLocation = {}
+                    )
                 }
             }
         }
